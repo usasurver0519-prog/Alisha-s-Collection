@@ -1,65 +1,43 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
-
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import {
-getFirestore,
-collection,
-getDocs
-} from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+  getFirestore,
+  collection,
+  getDocs
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
-
-apiKey: "YOUR_API",
-
-authDomain: "YOUR_DOMAIN",
-
-projectId: "YOUR_PROJECT",
-
-storageBucket: "YOUR_BUCKET",
-
-messagingSenderId: "YOUR_ID",
-
-appId: "YOUR_APP_ID"
-
+  apiKey: "AIzaSyDpCi0MmCMZMMt79sgxfP5xYQ88pnMxyzc",
+  authDomain: "alisha-collection-215f8.firebaseapp.com",
+  projectId: "alisha-collection-215f8",
+  storageBucket: "alisha-collection-215f8.firebasestorage.app",
+  messagingSenderId: "38995104343",
+  appId: "1:38995104343:web:38600db5a3304bddae0912",
+  measurementId: "G-LG3H5V4FWG"
 };
 
 const app = initializeApp(firebaseConfig);
-
 const db = getFirestore(app);
 
-const productsDiv = document.getElementById("products");
+async function loadProducts() {
+  const productsDiv = document.getElementById("products");
 
-async function loadProducts(){
+  const querySnapshot = await getDocs(collection(db, "products"));
 
-const snapshot = await getDocs(collection(db,"products"));
+  querySnapshot.forEach((doc) => {
+    const p = doc.data();
 
-snapshot.forEach((doc)=>{
-
-const p = doc.data();
-
-productsDiv.innerHTML += `
-<div class="card">
-
-<img src="${p.image}">
-
-<div class="card-content">
-
-<h3>${p.name}</h3>
-
-<p>${p.description}</p>
-
-<h2>৳ ${p.price}</h2>
-
-<a class="buy-btn"
-href="order.html?id=${doc.id}">
-Buy Now
-</a>
-
-</div>
-</div>
-`;
-
-});
-
+    productsDiv.innerHTML += `
+      <div class="product">
+        <img src="${p.image}" width="200">
+        <h3>${p.name}</h3>
+        <p>৳ ${p.price}</p>
+        <p>${p.details}</p>
+        <a href="order.html">
+          <button>Buy Now</button>
+        </a>
+      </div>
+    `;
+  });
 }
 
 loadProducts();
