@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Order</title>
+
+<style>
+
+body{
+font-family:Arial;
+padding:30px;
+}
+
+input,textarea{
+
+width:100%;
+padding:12px;
+margin-bottom:15px;
+
+}
+
+button{
+
+background:#c8a97e;
+color:white;
+border:none;
+padding:12px;
+width:100%;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h2>Confirm Order</h2>
+
+<form id="orderForm">
+
+<input placeholder="Name" required>
+
+<input placeholder="Phone" required>
+
+<textarea placeholder="Address"></textarea>
+
+<button>Place Order</button>
+
+</form>
+
+<script>
+
+document.getElementById("orderForm")
+.addEventListener("submit",(e)=>{
+
+e.preventDefault();
+
+window.open(
+"https://wa.me/8801410717923"
+);
+
+});
+
+</script>
+
+</body>
+
+</html>
