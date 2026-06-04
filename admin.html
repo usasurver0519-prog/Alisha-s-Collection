@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Admin Panel</title>
+
+<style>
+
+body{
+font-family:Arial;
+padding:20px;
+}
+
+input,textarea{
+
+width:100%;
+padding:10px;
+margin-bottom:10px;
+
+}
+
+button{
+
+padding:10px;
+background:#c8a97e;
+color:white;
+border:none;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h2>Add Product</h2>
+
+<input id="name" placeholder="Product Name">
+
+<input id="image" placeholder="Image URL">
+
+<input id="price" placeholder="Price">
+
+<textarea id="description"></textarea>
+
+<button onclick="saveProduct()">
+
+Add Product
+
+</button>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+addDoc
+} from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+
+const firebaseConfig = {
+
+apiKey: "YOUR_API",
+
+authDomain: "YOUR_DOMAIN",
+
+projectId: "YOUR_PROJECT",
+
+storageBucket: "YOUR_BUCKET",
+
+messagingSenderId: "YOUR_ID",
+
+appId: "YOUR_APP_ID"
+
+};
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+window.saveProduct = async ()=>{
+
+await addDoc(
+collection(db,"products"),
+{
+name:name.value,
+image:image.value,
+price:price.value,
+description:description.value
+}
+);
+
+alert("Product Added");
+
+};
+
+</script>
+
+</body>
+
+</html>
